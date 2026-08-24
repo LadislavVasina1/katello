@@ -54,7 +54,7 @@
     <% cvenv_truncated = truncate(cvenv_display, :length => 70) %>
     <% cvenv_overflow = cvenv_display.length > 70 %>
     <% cvenv_popover_lines = host_cvenvs.map do |cvenv|
-      version_info = cvenv.content_view.default? ? '' : " <small class=\"text-muted\">#{_('Version')} #{cvenv.content_view_version.version}#{cvenv.content_view_version.latest? ? ' (' + _('latest') + ')' : ''}</small>"
+      version_info = (cvenv.content_view.default? || cvenv.content_view.rolling?) ? '' : " <small class=\"text-muted\">#{_('Version')} #{cvenv.content_view_version.version}#{cvenv.content_view_version.latest? ? ' (' + _('latest') + ')' : ''}</small>"
       "<strong>#{h(cvenv.label)}</strong>#{version_info}"
     end %>
     <%= field(f, 'content_facet.content_view_environment', {:label => _("Content View Environment")}) do %>
